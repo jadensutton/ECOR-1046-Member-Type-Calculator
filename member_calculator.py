@@ -38,10 +38,6 @@ member_types = {
     "HSS 305 X 305 X 13": {"Area": 14400, "r": 118},
 }
 
-with open ("./members.csv") as f:
-    members = [{k: v for k, v in row.items ()}
-        for row in csv.DictReader(f, skipinitialspace=True)]
-
 def find_compression_member_type (direction, force):
     if direction == "H":
         length = horizontal_length
@@ -92,7 +88,12 @@ def find_tension_member_type (force):
     member_type = min (differences, key=differences.get)
     return member_type
 
+with open ("./members.csv") as f:
+    members = [{k: v for k, v in row.items ()}
+        for row in csv.DictReader(f, skipinitialspace=True)]
+
 print ("Returning member types")
+output = []
 for member in members:
     if member["Type"] == "C":
         member_type = find_compression_member_type (member["Direction"], member["Force"])
@@ -100,4 +101,8 @@ for member in members:
     elif member["Type"] == "T":
         member_type = find_tension_member_type (member["Force"])
 
-    print (member["Member"], "-", member_type)
+    output.append (str (member["Member"] + " - " + member_type))
+
+with open ("./output.csv", "w", newline="") as f:
+    writer = csv.writer (f, delimiter="\n")
+    writer.writerow (output)
