@@ -101,6 +101,7 @@ for member in members:
     elif member["Type"] == "T":
         member_type = find_tension_member_type (member["Force"])
 
+    print (member["Member"] + " - " + member_type)
     output.append (str (member["Member"] + " - " + member_type))
 
 with open ("./output.csv", "w", newline="") as f:
