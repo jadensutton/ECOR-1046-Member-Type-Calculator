@@ -54,8 +54,8 @@ def find_compression_member_type (direction, force):
         slenderness_ratio = (1 * length / (r /  1000))
         sigma_e =  ((math.pi ** 2) * (200000000000)) / (slenderness_ratio) ** 2
         lamda = (370000000 / sigma_e) ** (1 / 2)
-        f = 1 / ((1 + (lamda) ** (2 * 1.34)) ** (1/1.34))
-        compressive_resistance = 0.9 * f * 370000000 * (area / (1000*1000))
+        f = 1 / ((1 + (lamda) ** (2 * 1.34)) ** (1 / 1.34))
+        compressive_resistance = 0.9 * f * 370000000 * (area / (1000 * 1000))
         compressive_resistance = compressive_resistance / 1000
 
         resistances[member_type] = compressive_resistance
@@ -75,7 +75,7 @@ def find_tension_member_type (force):
         area = float (member_types[member_type]["Area"])
         r = float (member_types[member_type]["r"])
 
-        tensile_resistance = 0.9 * (370 * 1000) * (area / 1000)
+        tensile_resistance = 0.9 * (370 * 1000) * (area / (1000 * 1000))
 
         resistances[member_type] = tensile_resistance
 
